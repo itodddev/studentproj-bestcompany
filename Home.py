@@ -1,5 +1,8 @@
 import streamlit as st
 import pandas
+from dotenv import load_dotenv
+
+load_dotenv()  # take environment variables from .env.
 
 st.set_page_config(layout="wide")
 
@@ -14,18 +17,20 @@ viverra mauris in aliquam sem fringilla ut morbi tincidunt augue interdum velit 
 st.write(byline)
 st.subheader("Our Team")
 
-col1, blank1,  col2, blank2, col3 = st.columns([1.5, 0.5, 1.5, 0.5, 1.5])
+col1, col2, col3 = st.columns(3)
 dataframe = pandas.read_csv("data.csv")
 
 with col1:
     for index, row in dataframe[:4].iterrows():
-        st.subheader(f"{row['first name'].capitalize()} {row['last name'].capitalize()}")
+        name = f"{row['first name'].capitalize()} {row['last name'].capitalize()}"
+        st.subheader(name)
         st.write(row['role'])
         st.image("images/" + row['image'])
 
 with col2:
     for index, row in dataframe[4:8].iterrows():
-        st.subheader(f"{row['first name'].capitalize()} {row['last name'].capitalize()}")
+        name = f"{row['first name'].capitalize()} {row['last name'].capitalize()}"
+        st.subheader(name)
         st.write(row['role'])
         st.image("images/" + row['image'])
 
